@@ -51,6 +51,10 @@ const InviteNewMember = ({ navigation }: any) => {
       return false;
     }
     console.log("called");
+    if (!memberId.trim()) {
+      Toast.show({ type: "error", text1: "Member?staff Id required" });
+      return;
+    }
     try {
       const response = await inviteMember({
         individualInfo,

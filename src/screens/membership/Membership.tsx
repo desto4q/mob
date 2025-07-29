@@ -60,13 +60,13 @@ const Membership = ({ navigation }: any) => {
               sideIcon={images.pending_right}
               onPress={() => navigation.navigate("PendingRequest")}
             />
-            <CardAction
+            {/* <CardAction
               icon={icons.pending}
               title="SubScribe to Organization"
               text="Subscribe to an Organization"
               sideIcon={images.pending_right}
               onPress={() => navigation.navigate("SubscribeOrganization")}
-            />
+            /> */}
             <CardAction
               icon={icons.pending}
               title="All Subscriptions"

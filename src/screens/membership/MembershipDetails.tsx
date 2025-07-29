@@ -33,11 +33,13 @@ import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import EditMember from "./EditMember";
 import { RefreshControl } from "react-native-gesture-handler";
+import { useColorScheme } from "nativewind";
+
 
 const MembershipDetails = ({ navigation, route }: any) => {
   const insets = useSafeAreaInsets();
   const { data } = route?.params;
-
+  const {colorScheme} = useColorScheme()
   const { organization } = data;
   console.log("data", data);
   const navigate = useNavigation();
@@ -177,7 +179,8 @@ const MembershipDetails = ({ navigation, route }: any) => {
               Are you sure you want to leave organization
             </BaseText>
             <TextInput
-              style={tw`border border-gray-300 rounded-md p-3 mt-4 text-base`}
+            placeholderTextColor={colorScheme == "dark" ? "white":"black"}
+              style={tw`border dark:text-white border-gray-300 rounded-md p-3 mt-4 text-base`}
               placeholder="Reason for leaving (optional)"
               multiline
               numberOfLines={4}

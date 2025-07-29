@@ -33,6 +33,7 @@ import { useGetSubscriptionQuery } from "../../state/features/services/subscript
 import PageLoader from "../../components/Loader";
 import BaseText from "../../components/BaseText";
 import MaterialErrorComponent from "../../components/errors/ErrorComp";
+import { RefreshControl } from "react-native-gesture-handler";
 
 const OrgSubscription = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
@@ -70,7 +71,15 @@ const OrgSubscription = ({ navigation }: any) => {
 
   return (
     <PageContainer>
-      <ScrollView style={tw``}>
+      <ScrollView
+        style={tw``}
+        refreshControl={
+          <RefreshControl
+            onRefresh={refetch}
+            refreshing={isFetching}
+          ></RefreshControl>
+        }
+      >
         <View style={tw` flex-row justify-between`}>
           <BackButton onPress={() => navigation.goBack()} />
           <Header font="semi_bold" size={16}>

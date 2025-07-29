@@ -83,7 +83,7 @@ const InputTextWithLabel: FC<IInputText> = (props) => {
         <TextInput
           placeholder={placeholder ? placeholder : ""}
           style={[styles.inputText, tw`text-black dark:text-white text-base`]}
-          placeholderTextColor={colors.black}
+          placeholderTextColor={colorScheme == "dark" ? "white" : "black"}
           secureTextEntry={type === "password" && !isPasswordVisible} // Toggle visibility based on state
           onChangeText={onChangeText}
           value={value}

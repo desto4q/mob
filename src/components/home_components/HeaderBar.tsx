@@ -10,7 +10,13 @@ import { useToggleMode } from "../../utils/helpers";
 import { useNavigation } from "@react-navigation/native";
 import BaseText from "../BaseText";
 import { colors } from "../../utils/constants";
+import { useGetNotificationsQuery } from "../../state/features/services/users/user";
 
+interface API_RESPONSE {
+  code: number;
+  message: string;
+  data: any[];
+}
 export default function Headerbar({
   companyName,
   firstName,
@@ -32,6 +38,9 @@ export default function Headerbar({
       return "Good evening";
     }
   };
+  const notifications = useGetNotificationsQuery();
+  const nots = notifications.data as unknown as API_RESPONSE;
+  const unreadNotifications = nots.data.filter((item) => !item.read);
   const greeting = getGreeting();
   return (
     <View style={tw`border-b border-[${colors.gray}]/50 pb-3`}>
@@ -92,9 +101,11 @@ export default function Headerbar({
                   colorScheme === "dark" ? "bg-gray-800" : "bg-gray-50"
                 }`}
               >
-                <View
-                  style={tw`p-2 bg-red-500 absolute right-1 top-1 z-10 rounded-full`}
-                ></View>
+                {unreadNotifications.length > 0 && (
+                  <View
+                    style={tw`p-1.5 bg-red-500 absolute right-1 top-1 z-10 rounded-full`}
+                  ></View>
+                )}
                 <SimpleLineIcons
                   name="bell"
                   size={20}

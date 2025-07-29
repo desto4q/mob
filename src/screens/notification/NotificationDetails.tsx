@@ -22,6 +22,7 @@ const NotificationDetails = ({ navigation, route }: any) => {
     const markNotificationAsRead = async () => {
       if (!read) {
         try {
+          // console.log(data.data, "nots");
           await newApi.patch(`/api/users/notification/read?id=${id}`, {});
         } catch (error) {
           console.error("Failed to mark notification as read:", error);

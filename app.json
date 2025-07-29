@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "MobiHolder",
+    "slug": "mobiholder",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/logo_dark.png",
+      "resizeMode": "cover",
+
+      "backgroundColor": "#ffffff",
+      "dark": {
+        "image": "./assets/logo_light.png",
+        "backgroundColor": "#15171E"
+      }
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.greenmousetest.mobiholder"
+    },
+    "android": {
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.greenmousetest.mobiholder"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "04902b30-11c3-4aa2-ba9d-de3836ef0a8d"
+      }
+    },
+    "jsEngine": "hermes"
+  }
+}

@@ -1,0 +1,107 @@
+name: React Native CI/CD
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  android_release_build:
+    name: Build Android Release APK (for Testing)
+    runs-on: ubuntu-latest
+    env:
+      GRADLE_OPTS: -Xmx4096m
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          cache: gradle
+
+      - name: Install Bun
+        run: curl -fsSL https://bun.sh/install | bash
+
+      - name: Add Bun to PATH
+        run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
+
+      - name: Install Dependencies with Bun
+        run: bun install
+
+      - name: Build Android Release APK
+        run: |
+          cd android
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Upload Android Release APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-release-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+
+      - name: Create GitHub Release & Upload APK
+        uses: softprops/action-gh-release@v2
+        with:
+          files: android/app/build/outputs/apk/release/app-release.apk
+          name: "Build ${{ github.run_number }} (release)"
+          tag_name: "build-${{ github.run_number }}-release" # or "build-${{ github.run_id }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # android_debug_build:
+  #   name: Build Android Debug APK (for Testing)
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     GRADLE_OPTS: -Xmx4096m
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: "22"
+
+  #     - name: Setup Java JDK
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         distribution: "temurin"
+  #         java-version: "17"
+  #         cache: gradle
+
+  #     - name: Install Bun
+  #       run: curl -fsSL https://bun.sh/install | bash
+
+  #     - name: Add Bun to PATH
+  #       run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
+
+  #     - name: Install Dependencies with Bun
+  #       run: bun install
+
+  #     - name: Build Android Release APK
+  #       run: |
+  #         cd android
+  #         ./gradlew assembleDebug --no-daemon
+
+  #     - name: Upload Android Debug APK Artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: android-debug-apk
+  #         path: android/app/build/outputs/apk/debug/app-debug.apk
+
+  #     - name: Create GitHub Debug & Upload APK
+  #       uses: softprops/action-gh-release@v2
+  #       with:
+  #         files: android/app/build/outputs/apk/debug/app-debug.apk
+  #         name: "Build ${{ github.run_number }} (debug)"
+  #         tag_name: "build-${{ github.run_number }}-debug" # or "build-${{ github.run_id }}"
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

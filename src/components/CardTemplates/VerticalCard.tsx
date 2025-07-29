@@ -35,14 +35,14 @@ const VerticalCard = ({
     <Pressable
       style={[
         { width: width },
-        tw`w-[282px] rounded-2xl  p-5 bg-[${template ? template?.backgroundColor : card?.backgroundColor}]/25  p-2`,
+        tw`w-[320px] rounded-2xl  p-5 bg-[${template ? template?.backgroundColor : card?.backgroundColor}]/25  p-2`,
         style,
       ]}
     >
       <View style={tw`flex-row  justify-between   items-center mb-4`}>
-        <BaseText {...template} style={tw`text-xl`}>
-          {card.name}
-        </BaseText>
+        <View>
+          <BaseText style={tw`text-xl`}>{card?.name}</BaseText>
+        </View>
         {!cardData && (
           <MaterialCommunityIcons
             name="dots-vertical"

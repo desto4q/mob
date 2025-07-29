@@ -176,7 +176,7 @@ const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
         <BaseText
           style={tw`text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2`}
         >
-          Customer
+          Subscriber
         </BaseText>
         <BaseText
           style={tw`text-lg font-semibold text-gray-900 dark:text-white mb-1`}

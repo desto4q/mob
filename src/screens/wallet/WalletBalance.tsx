@@ -84,7 +84,11 @@ export default function WalletBalance() {
     },
   });
   if (query.isError)
-    return <MaterialErrorComponent backButton></MaterialErrorComponent>;
+    return (
+      <PageContainer>
+        <MaterialErrorComponent backButton></MaterialErrorComponent>
+      </PageContainer>
+    );
   if (query.isFetching) return <PageLoader />;
   console.log(JSON.stringify(query.data?.data[0]));
   return (

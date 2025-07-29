@@ -40,7 +40,7 @@ export default function Headerbar({
   };
   const notifications = useGetNotificationsQuery();
   const nots = notifications.data as unknown as API_RESPONSE;
-  const unreadNotifications = nots.data.filter((item) => !item.read);
+  const unreadNotifications = nots?.data?.filter((item) => !item.read);
   const greeting = getGreeting();
   return (
     <View style={tw`border-b border-[${colors.gray}]/50 pb-3`}>
@@ -101,7 +101,7 @@ export default function Headerbar({
                   colorScheme === "dark" ? "bg-gray-800" : "bg-gray-50"
                 }`}
               >
-                {unreadNotifications.length > 0 && (
+                {unreadNotifications?.length > 0 && (
                   <View
                     style={tw`p-1.5 bg-red-500 absolute right-1 top-1 z-10 rounded-full`}
                   ></View>

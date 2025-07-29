@@ -139,7 +139,7 @@ let SubItem = (e: LOG) => {
               {e.plan.name}
             </BaseText>
           </View>
-          <BaseText style={tw`text-sm text-gray-400 mt-1`}>
+          <BaseText style={tw`text-sm  mt-1`}>
             ₦{e.plan.price} • {e.plan.validity} days
           </BaseText>
         </View>
@@ -147,7 +147,9 @@ let SubItem = (e: LOG) => {
         <MaterialIcons name="arrow-forward-ios" size={16} color="#A3A3A4" />
       </View>
 
-      <Text style={tw`text-sm text-gray-300 mt-3`}>{e.plan.description}</Text>
+      <BaseText style={tw`text-sm opacity-70  mt-3`}>
+        {e.plan.description}
+      </BaseText>
     </Pressable>
   );
 };

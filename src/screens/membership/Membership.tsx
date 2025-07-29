@@ -102,6 +102,13 @@ const Membership = ({ navigation }: any) => {
             />
             <CardAction
               icon={icons.subscription}
+              title="General Subscription"
+              text="Manage subscription plans"
+              sideIcon={images.subscription_right}
+              onPress={() => navigation.navigate("GeneralSubscription")}
+            />
+            <CardAction
+              icon={icons.subscription}
               title="Designations"
               text="Manage Designations"
               sideIcon={images.subscription_right}

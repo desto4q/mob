@@ -97,6 +97,7 @@ import SubscribeDetails from "../screens/subscribtion/SubscribeDetails";
 import AllSubsctiptions from "../screens/subscribtion/AllSubscriptions";
 import SubAccounts from "../screens/profile/SubAccounts";
 import ViewDesignations from "../screens/subscribtion/ViewDesignations";
+import GeneralSubscription from "../screens/membership/GeneralSubscription";
 
 const Stack = createNativeStackNavigator();
 
@@ -454,6 +455,11 @@ const MainNavigator = ({ navigation }: any) => {
             <Stack.Screen
               name="IndGeneralSubscription"
               component={IndGeneralSubscription}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="GeneralSubscription"
+              component={GeneralSubscription}
               options={{ headerShown: false }}
             />
             <Stack.Screen

@@ -144,6 +144,7 @@ export default function ViewDesignations() {
                   type: "success",
                   text1: "created successfully",
                 });
+                setModal(false);
                 query.refetch();
                 setDesignation("");
                 setDescription("");

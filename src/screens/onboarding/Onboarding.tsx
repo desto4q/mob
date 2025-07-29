@@ -79,7 +79,7 @@ const Onboarding = ({ navigation }: any) => {
             dotStyle={{ backgroundColor: "transparent" }}
             activeDotStyle={{ backgroundColor: "transparent" }}
             renderItem={({ item }) => (
-              <View>
+              <View style={tw`justify-center flex flex-row items-center`}>
                 <Image
                   source={item.image}
                   style={tw`h-[300px] w-[300px]`}

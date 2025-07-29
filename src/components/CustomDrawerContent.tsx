@@ -64,6 +64,7 @@ const CustomDrawerContent = (props: any) => {
       });
     }
   };
+  // console.log(props.drawerItems);
   return (
     <>
       <DrawerContentScrollView

@@ -12,11 +12,13 @@ import tw from "twrnc";
 import images from "../../utils/constants/images";
 import VerificationAction from "../../components/verifcation/VerificationAction";
 import { useGetUserQuery } from "../../state/features/services/users/user";
+import { useGetEventsQuery } from "../../state/features/services/events/events";
 
 const EventOverview = ({ navigation }: any) => {
   const { data } = useGetUserQuery();
   const { accountType } = (data?.data as any) || {};
-
+  const events_query = useGetEventsQuery<EventsResponse>();
+  const upcomingEvents = events_query.data?.data?.length || 0;
   return (
     <PageContainer>
       <SafeAreaView style={{}}>
@@ -49,7 +51,7 @@ const EventOverview = ({ navigation }: any) => {
               />
               <VerificationAction
                 title="Up Coming Events"
-                text="2 Events"
+                text={`${upcomingEvents} Events`}
                 image={images.all_verification}
                 onPress={() => navigation.navigate("UpcomingEvent")}
               />
@@ -84,7 +86,7 @@ const EventOverview = ({ navigation }: any) => {
             <View style={tw`gap-5 mt-10`}>
               <VerificationAction
                 title="Up Coming Events"
-                text="2 Events"
+                text={`${upcomingEvents} Events`}
                 image={images.all_verification}
                 onPress={() => navigation.navigate("UpcomingEvent")}
               />

@@ -80,6 +80,7 @@ export default function EditMember({ navigation, route }: any) {
           membershipId: String(member?.id),
           status: status, // declined, inactive or active
           memberId: String(memberId),
+          role: designation.value,
           // organizationEmail: organizationEmail, // Not Required
         },
       );

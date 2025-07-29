@@ -110,11 +110,11 @@ const OrganizationHome = ({ navigation }) => {
                 Jump right in and get started
               </TextPrimary>
             </View>
-            <MaterialIcons
+            {/* <MaterialIcons
               name="arrow-forward-ios"
               size={16}
               color={colorScheme === "dark" ? "#94A3B8" : "#64748B"}
-            />
+            /> */}
           </View>
         </View>
         <View style={tw`px-[2%]  `}>

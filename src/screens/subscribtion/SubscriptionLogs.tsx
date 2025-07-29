@@ -8,10 +8,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import PageContainer from "../../components/PageContainer";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "../../components/texts/header";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { colors } from "../../utils/constants";
@@ -20,29 +17,39 @@ import tw from "../../lib/tailwind";
 import BackButton from "../../components/BackButton";
 import InputText from "../../components/inputs/InputText";
 import icons from "../../utils/constants/icons";
-import SubscriptionLogItem from "../../components/SubscriptionLogItem";
 import { useQuery } from "@tanstack/react-query";
 import { newApi } from "../../state/newStates/flow";
 import PageLoader from "../../components/Loader";
 import MaterialErrorComponent from "../../components/errors/ErrorComp";
-
+import BaseText from "../../components/BaseText";
+export interface LOG {
+  id: number;
+  individualId: string;
+  plan: {
+    id: number;
+    name: string;
+    price: string;
+    validity: number;
+    description: string;
+  };
+}
 interface API_RESPONSE {
   code: number;
   message: string;
-  data: any[];
+  data: LOG[];
 }
 const SubscriptionLogs = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
   const query = useQuery({
     queryKey: ["subscription logs"],
     queryFn: async () => {
-      let response = await newApi.get(
+      let response = await newApi.get<API_RESPONSE>(
         "/api/memberships-subscriptions/get/subscribers?status=active",
       );
       return response.data;
     },
   });
-
+  console.log(JSON.stringify(query.data?.data[0]));
   // useEffect(() => {
   //   console.log(JSON.stringify(query.error?.response.data.message));
   // }, [query.isError]);
@@ -97,10 +104,11 @@ const SubscriptionLogs = ({ navigation }: any) => {
           </View>
 
           <View style={tw`mt-6 gap-5`}>
-            {/* <SubscriptionLogItem onPress={() => navigation.navigate("MemberPreview")}/>
-                        <SubscriptionLogItem onPress={() => navigation.navigate("MemberPreview")}/>
-                        <SubscriptionLogItem onPress={() => navigation.navigate("MemberPreview")}/>
-                        <SubscriptionLogItem onPress={() => navigation.navigate("MemberPreview")}/> */}
+            {/* <BaseText>{JSON.stringify(query.data?.data)}</BaseText> */}
+            {/* {/* <SubscriptionLogItem onPress={() => navigation.navigate("MemberPreview")}/> */}
+            {query.data?.data.map((e) => {
+              return <SubItem {...e} key={e.id} />;
+            })}
           </View>
         </View>
       </ScrollView>
@@ -111,3 +119,35 @@ const SubscriptionLogs = ({ navigation }: any) => {
 export default SubscriptionLogs;
 
 const styles = StyleSheet.create({});
+
+// let SubItem = (e: LOG) => {
+//   return <View>{ }</View>;
+// };
+
+let SubItem = (e: LOG) => {
+  return (
+    <Pressable
+      style={tw`bg-white dark:bg-[#1C1C1E] rounded-2xl p-4 shadow-md border border-gray-800`}
+      android_ripple={{ color: "#ccc" }}
+    >
+      <View style={tw`flex-row justify-between items-center`}>
+        <View style={tw`flex-1`}>
+          <View style={tw`flex-row`}>
+            <BaseText
+              style={tw`text-sm font-semibold p-2 bg-primary/50 rounded-full  mb-2 `}
+            >
+              {e.plan.name}
+            </BaseText>
+          </View>
+          <BaseText style={tw`text-sm text-gray-400 mt-1`}>
+            ₦{e.plan.price} • {e.plan.validity} days
+          </BaseText>
+        </View>
+
+        <MaterialIcons name="arrow-forward-ios" size={16} color="#A3A3A4" />
+      </View>
+
+      <Text style={tw`text-sm text-gray-300 mt-3`}>{e.plan.description}</Text>
+    </Pressable>
+  );
+};

@@ -71,7 +71,6 @@ const InputTextWithLabel: FC<IInputText> = (props) => {
       {label && (
         <TextPrimary
           size={13}
-          font="medium"
           color={colors.gray_light}
           style={[{ marginBottom: 10 }, tw`text-gray_light`]}
         >
@@ -83,8 +82,8 @@ const InputTextWithLabel: FC<IInputText> = (props) => {
       >
         <TextInput
           placeholder={placeholder ? placeholder : ""}
-          style={[styles.inputText, tw`text-black dark:text-white`]}
-          placeholderTextColor={colors.gray}
+          style={[styles.inputText, tw`text-black dark:text-white text-base`]}
+          placeholderTextColor={colors.black}
           secureTextEntry={type === "password" && !isPasswordVisible} // Toggle visibility based on state
           onChangeText={onChangeText}
           value={value}

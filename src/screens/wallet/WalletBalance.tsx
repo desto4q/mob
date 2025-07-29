@@ -97,9 +97,10 @@ export default function WalletBalance() {
 
         {/* Balance Card */}
       </View>
-      <View style={tw`p-4 flex-1`}>
+      <View style={tw`p-4 px-0 flex-1`}>
         {/* <BaseText>History here</BaseText> */}
         <FlashList
+          contentContainerStyle={tw`px-3`}
           data={query.data?.data}
           renderItem={({ index, item }) => {
             return <TransactionItem transaction={item} key={item.id} />;

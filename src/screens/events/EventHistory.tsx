@@ -19,11 +19,30 @@ import tw from "../../lib/tailwind";
 import BackButton from "../../components/BackButton";
 import EventHistoryItem from "../../components/event/EventHistoryItem";
 import TabSelect from "../../components/TabSelect";
+import { useQuery } from "@tanstack/react-query";
+import { newApi } from "../../state/newStates/flow";
+import PageLoader from "../../components/Loader";
+import MaterialErrorComponent from "../../components/errors/ErrorComp";
 
 const EventHistory = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
   const [tab, setTab] = useState("invitations");
+  const eventsQuery = useQuery({
+    queryKey: ["events history"],
+    queryFn: async () => {
+      let resp = await newApi("/api/events/event/logs");
+      return resp.data;
+    },
+  });
 
+  if (eventsQuery.isFetching) return <PageLoader />;
+  if (eventsQuery.isError)
+    return (
+      <MaterialErrorComponent
+        backButton
+        message={JSON.stringify(eventsQuery.error.response.data.message)}
+      />
+    );
   return (
     <PageContainer>
       <SafeAreaView style={{ flex: 1 }}>
@@ -40,7 +59,7 @@ const EventHistory = ({ navigation }: any) => {
               All past events
             </TextPrimary>
             <TabSelect data={["My Events", "Invited Events"]} />
-            <FlatList
+            {/* <FlatList
               data={[...Array(4)]}
               renderItem={({}) => (
                 <View style={tw`my-2`}>
@@ -48,7 +67,7 @@ const EventHistory = ({ navigation }: any) => {
                 </View>
               )}
               style={tw` `}
-            />
+            /> */}
           </View>
         </ScrollView>
       </SafeAreaView>

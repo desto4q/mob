@@ -10,6 +10,7 @@ import { useToggleMode } from "../../utils/helpers";
 import { useNavigation } from "@react-navigation/native";
 import BaseText from "../BaseText";
 import { colors } from "../../utils/constants";
+
 export default function Headerbar({
   companyName,
   firstName,
@@ -91,6 +92,9 @@ export default function Headerbar({
                   colorScheme === "dark" ? "bg-gray-800" : "bg-gray-50"
                 }`}
               >
+                <View
+                  style={tw`p-2 bg-red-500 absolute right-1 top-1 z-10 rounded-full`}
+                ></View>
                 <SimpleLineIcons
                   name="bell"
                   size={20}

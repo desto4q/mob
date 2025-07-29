@@ -27,7 +27,7 @@ import moment from "moment";
 const CreateEventForm2 = ({ navigation, eventData, eventDetails }) => {
   console.log("form 2", eventData);
   const [isChecked, setIsChecked] = useState(
-    eventDetails?.isRecurring ?? false
+    eventDetails?.isRecurring ?? false,
   );
   const handleCheckboxChange = (checked: boolean) => {
     setIsChecked(checked);
@@ -59,7 +59,7 @@ const CreateEventForm2 = ({ navigation, eventData, eventDetails }) => {
       reoccurrenceEndDate:
         moment(eventDetails?.recurrenceEndDate).format("YYYY-MM-DD") ?? "",
       reoccurrenceCount: eventDetails?.recurrenceCount ?? "",
-      reoccurenceEndType: eventDetails?.recurrenceEndType ?? "",
+      reoccurenceEnd: eventDetails?.recurrenceEndType ?? "",
     },
   });
   console.log(venueImage);
@@ -93,7 +93,7 @@ const CreateEventForm2 = ({ navigation, eventData, eventDetails }) => {
     ) {
       Alert.alert(
         "Validation Error",
-        "End time should be greater than start time for same day event"
+        "End time should be greater than start time for same day event",
       );
       return;
     }

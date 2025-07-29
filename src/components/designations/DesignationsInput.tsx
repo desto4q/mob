@@ -28,10 +28,9 @@ export default function MemberDesignations({ role, onChange }: any) {
   const [showModal, setModal] = useState<boolean>(false);
   const [designation, setDesignation] = useState<string>("");
   useEffect(() => {
-    console.log(onch);
-    // if (value) {
-    //   onChange(value.name);
-    // }
+    if (value) {
+      onChange(value.name);
+    }
   }, [value]);
   const designations = useQuery<API_RESPONSE>({
     queryKey: ["invite designations"],

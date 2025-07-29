@@ -110,54 +110,115 @@ export default function WalletBalance() {
     </PageContainer>
   );
 }
-
 const TransactionItem = ({ transaction }: { transaction: Transaction }) => {
   const { amount, createdAt, status, paystackResponse, reference, individual } =
     transaction;
-
   const isSuccessful = status.toLowerCase() === "success";
 
   return (
     <View
-      style={tw`bg-white dark:bg-[#1C1C1E] rounded-2xl p-4 mb-4 border border-gray-800 shadow-sm`}
+      style={tw`bg-white dark:bg-[#121212] rounded-3xl p-6 mb-4 shadow-lg border-0`}
     >
-      {/* Top: Amount + Status Icon */}
-      <View style={tw`flex-row justify-between items-center`}>
+      {/* Header Section with elevated card feeling */}
+      <View style={tw`flex-row justify-between items-start mb-4`}>
         <View style={tw`flex-1`}>
-          <BaseText style={tw`text-base font-semibold`}>₦{amount}</BaseText>
-          <BaseText style={tw`text-xs mt-1`}>
-            {new Date(createdAt).toLocaleDateString()} •{" "}
-            {paystackResponse.channel}
+          {/* Amount with better typography hierarchy */}
+          <BaseText
+            style={tw`text-2xl font-bold text-gray-900 dark:text-white mb-1`}
+          >
+            ₦{amount.toLocaleString()}
           </BaseText>
+
+          {/* Date and channel with material chips style */}
+          <View style={tw`flex-row items-center`}>
+            <View
+              style={tw`bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full mr-2`}
+            >
+              <BaseText
+                style={tw`text-xs font-medium text-gray-600 dark:text-gray-300`}
+              >
+                {new Date(createdAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </BaseText>
+            </View>
+            <View
+              style={tw`bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full`}
+            >
+              <BaseText
+                style={tw`text-xs font-medium text-blue-600 dark:text-blue-400 capitalize`}
+              >
+                {paystackResponse.channel}
+              </BaseText>
+            </View>
+          </View>
         </View>
-        <MaterialIcons
-          name={isSuccessful ? "check-circle" : "cancel"}
-          size={24}
-          color={isSuccessful ? "#4CAF50" : "#F44336"}
-        />
+
+        {/* Status icon with material elevation */}
+        <View
+          style={tw`${isSuccessful ? "bg-green-50 dark:bg-green-900/30" : "bg-red-50 dark:bg-red-900/30"} p-3 rounded-full shadow-sm`}
+        >
+          <MaterialIcons
+            name={isSuccessful ? "check-circle" : "error"}
+            size={28}
+            color={isSuccessful ? "#10B981" : "#EF4444"}
+          />
+        </View>
       </View>
 
-      {/* Individual Info */}
-      <View style={tw`mt-3`}>
-        <BaseText style={tw`text-sm font-medium`}>
+      {/* Divider */}
+      <View style={tw`h-px bg-gray-200 dark:bg-gray-700 mb-4`} />
+
+      {/* Customer Information Section */}
+      <View style={tw`mb-4`}>
+        <BaseText
+          style={tw`text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2`}
+        >
+          Customer
+        </BaseText>
+        <BaseText
+          style={tw`text-lg font-semibold text-gray-900 dark:text-white mb-1`}
+        >
           {individual.firstName} {individual.lastName}
         </BaseText>
-        <BaseText style={tw`text-xs`}>
-          {individual.email} • {individual.phoneNumber}
+        <BaseText style={tw`text-sm text-gray-600 dark:text-gray-300 mb-1`}>
+          {individual.email}
+        </BaseText>
+        <BaseText style={tw`text-sm text-gray-600 dark:text-gray-300`}>
+          {individual.phoneNumber}
         </BaseText>
       </View>
 
-      {/* Reference + Status */}
-      <View style={tw`mt-3`}>
-        <BaseText style={tw`text-xs`}>Ref: {reference}</BaseText>
-        <BaseText style={tw`text-xs mt-1`}>
-          Status:{" "}
+      {/* Footer Section */}
+      <View
+        style={tw`flex-row justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-800`}
+      >
+        {/* Reference */}
+        <View style={tw`flex-1`}>
           <BaseText
-            style={tw`text-xs ${isSuccessful ? "text-green-500" : "text-red-500"}`}
+            style={tw`text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1`}
           >
-            {status.toUpperCase()}
+            Reference
           </BaseText>
-        </BaseText>
+          <BaseText
+            style={tw`text-sm font-mono text-gray-700 dark:text-gray-300`}
+          >
+            {reference}
+          </BaseText>
+        </View>
+
+        {/* Status Badge */}
+        <View
+          style={tw`${isSuccessful ? "bg-green-100 dark:bg-green-900/50" : "bg-red-100 dark:bg-red-900/50"} px-3 py-2 rounded-full`}
+        >
+          <BaseText
+            style={tw`text-xs font-bold ${isSuccessful ? "text-green-800 dark:text-green-200" : "text-red-800 dark:text-red-200"} uppercase tracking-wide`}
+          >
+            {status}
+          </BaseText>
+        </View>
       </View>
     </View>
   );

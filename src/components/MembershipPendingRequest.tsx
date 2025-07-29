@@ -29,9 +29,9 @@ const MembershipPendingRequest = ({ navigation }: any) => {
     "",
   );
   const userData = useGetUserQuery();
-  useEffect(() => {
-    console.log(userData.data.data.email, "suserdatas");
-  }, [userData.isFetching]);
+  // useEffect(() => {
+  //   console.log(userData.data.data.email, "suserdatas");
+  // }, [userData.isFetching]);
   const [memberId, setMemberId] = useState("");
   const [organizationEmail, setOrganizationEmail] = useState(
     userData.data.data.companyEmail,
@@ -252,6 +252,8 @@ const MembershipPendingRequest = ({ navigation }: any) => {
                 label="Member/Staff ID"
                 placeholder="Enter member/staff ID"
                 style={tw`dark:border border-[#8F8E8E] h-[40px]`}
+                value={memberId}
+                onChangeText={setMemberId}
               />
               <InputTextWithLabel
                 label="Organisation Email"

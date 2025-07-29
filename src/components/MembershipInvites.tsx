@@ -94,12 +94,13 @@ const MembershipInvites = ({}) => {
         data={pendingInvite?.data}
         renderItem={({ item }) => (
           <View style={tw`my-3`}>
-            <MembershipInviteItem
+            {/* <MembershipInviteItem
               item={item.individual}
               designation={item?.designation}
               membershipId={item.id}
               toggleModal={toggleModal}
-            />
+
+            /> */}
           </View>
         )}
         style={tw`mt-5 `}
@@ -111,11 +112,7 @@ const MembershipInvites = ({}) => {
         }
         ListHeaderComponent={
           <View>
-            <TextPrimary
-              size={13}
-              font="medium"
-              style={tw` text-gray_light`}
-            >
+            <TextPrimary size={13} font="medium" style={tw` text-gray_light`}>
               All your sent membership invites
             </TextPrimary>
           </View>

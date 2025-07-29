@@ -25,7 +25,7 @@ import PrimaryButton from "./buttons/PrimaryButtom";
 interface ItemProps {
   image?: ImageSourcePropType;
   onPress?: () => void;
-  toggleModal: (item:any) => void;
+  toggleModal: (item: any) => void;
   item: any;
   membershipId: string;
   designation: string;
@@ -37,16 +37,9 @@ const MembershipInviteItem = ({
   designation,
   toggleModal,
 }: ItemProps) => {
-  
-  
- 
-
   return (
     <>
-      <View
-        style={tw`gap-1 flex-row w-full  justify-between `}
-        
-      >
+      <View style={tw`gap-1 flex-row w-full  justify-between `}>
         <View
           style={tw`flex-row flex-1 gap-2  items-center rounded-[10px] overflow-hidden`}
         >
@@ -66,7 +59,7 @@ const MembershipInviteItem = ({
               color="#A6A6A6"
               style={tw`mt-1 text-gray_light`}
             >
-              {item.email}
+              {/* {item.email} */}
             </TextPrimary>
             <TextPrimary
               font="montserrat_medium"
@@ -92,8 +85,6 @@ const MembershipInviteItem = ({
         </View> */}
         </View>
       </View>
-
-      
     </>
   );
 };

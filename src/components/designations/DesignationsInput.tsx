@@ -41,6 +41,22 @@ export default function MemberDesignations({ role, onChange }: any) {
       return resp.data;
     },
   });
+
+  // Handle errors from the query
+  useEffect(() => {
+    if (designations.isError) {
+      Toast.show({
+        type: "error",
+        text1: "Failed to load roles",
+        text2:
+          (designations.error as any)?.message ||
+          "An unexpected error occurred. Please try again.",
+      });
+      // Keep console log for debugging purposes
+      console.log("designations_error:", JSON.stringify(designations.error));
+    }
+  }, [designations.isError, designations.error]);
+
   const designations_data = designations.data?.data.map((e) => {
     return {
       label: e.name,
@@ -48,7 +64,6 @@ export default function MemberDesignations({ role, onChange }: any) {
       ...e,
     };
   });
-  console.log("designations_error:", JSON.stringify(designations.error));
   return (
     <View style={tw`flex-row flex items-center`}>
       <Dropdown

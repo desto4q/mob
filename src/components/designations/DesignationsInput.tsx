@@ -57,13 +57,14 @@ export default function MemberDesignations({ role, onChange }: any) {
     }
   }, [designations.isError, designations.error]);
 
-  const designations_data = designations.data?.data.map((e) => {
-    return {
-      label: e.name,
-      value: e.name,
-      ...e,
-    };
-  });
+  const designations_data =
+    designations.data?.data?.map((e) => {
+      return {
+        label: e.name,
+        value: e.name,
+        ...e,
+      };
+    }) || [];
   return (
     <View style={tw`flex-row flex items-center`}>
       <Dropdown

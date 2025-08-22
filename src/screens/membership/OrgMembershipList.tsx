@@ -44,7 +44,7 @@ const OrgMembershipList = ({ navigation }: any) => {
   return (
     <PageContainer padding="0%">
       <View style={tw`flex-1  pb-10`}>
-        <View style={tw` flex-row justify-between px-[5%]`}>
+        <View style={tw` flex-row justify-between px-[5%] items-center`}>
           <BackButton onPress={() => navigation.goBack()} />
           <Header font="semi_bold" size={16}>
             Membership

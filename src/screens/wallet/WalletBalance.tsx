@@ -89,7 +89,12 @@ export default function WalletBalance() {
         <MaterialErrorComponent backButton></MaterialErrorComponent>
       </PageContainer>
     );
-  if (query.isFetching) return <PageLoader />;
+  if (query.isFetching)
+    return (
+      <PageContainer>
+        <PageLoader />
+      </PageContainer>
+    );
   console.log(JSON.stringify(query.data?.data[0]));
   return (
     <PageContainer padding={0}>

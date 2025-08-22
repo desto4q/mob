@@ -84,7 +84,7 @@ const MemberPreview = ({ navigation, route }: any) => {
     <>
       <PageContainer>
         <ScrollView style={tw``}>
-          <View style={tw` flex-row justify-between`}>
+          <View style={tw` flex-row justify-between items-center`}>
             <BackButton onPress={() => navigation.goBack()} />
             <Header font="semi_bold" size={16}>
               Member Preview
